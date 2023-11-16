@@ -8,17 +8,17 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 
 @Controller
-public class CheckController {
+public class ConvertController {
     @Autowired
     private IConvertService convertService;
     @GetMapping("")
     public String showForm(){
-        return "/check";
+        return "/currency_conversion";
     }
     @PostMapping("/convert")
     public String useToVnd(double usd, Model model){
         double vnd = convertService.UsdToVnd(usd);
         model.addAttribute("vnd",vnd);
-        return "/check";
+        return "/currency_conversion";
     }
 }

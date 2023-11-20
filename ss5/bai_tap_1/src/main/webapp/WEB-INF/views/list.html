@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        table {
+            border: 1px solid #000;
+
+        }
+
+        th, td {
+            border: 1px dotted #555;
+        }
+    </style>
+
+</head>
+<body>
+<h1 align="center">Product List</h1>
+<div align="center" th:if="${message}" style="color: green">
+  <strong style="color: green" th:text="${message}"></strong>
+</div>
+<h4 align="center">
+  <a  th:href="@{/product/create}">
+    Add new product
+  </a>
+</h4>
+
+<form align="center" action="/product/search" method="get" novalidate="novalidate">
+  <input type="text" required placeholder="Enter the name to search" name="name" th:value="${name}">
+  <input type="submit" value="Confirm"/>
+</form>
+<table align="center">
+  <tr>
+    <th>Stt</th>
+    <th>Name</th>
+    <th>Point</th>
+    <th>Brand</th>
+    <th>Detail</th>
+    <th>Update</th>
+    <th>Delete</th>
+  </tr>
+  <tr th:each="productList,loop : ${productList}">
+    <td th:text="${loop.count}"></td>
+    <td th:text="${productList.getName()}"/>
+    <td th:text="${productList.getPrice()}"></td>
+    <td th:text="${productList.getBrand()}"></td>
+    <td>
+      <a  th:href="@{/product/{id}/detail(id=${productList.getId()})}">Detail</a>
+    </td>
+    <td>
+      <a  th:href="@{/product/{id}/edit(id=${productList.getId()})}">Edit</a>
+    </td>
+    <td>
+      <a th:href="@{/product/delete(id=${productList.getId()})}">Delete</a>
+    </td>
+  </tr>
+
+</table>
+</body>
+</html>

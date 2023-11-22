@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+<div class="container-fluid">
+  <h1>View Detail</h1>
+  <a class="btn btn-outline-dark" th:href="@{/blog}">
+    Back to product list
+  </a>
+
+  <table>
+    <tr>
+      <th>
+        <label>Name:</label>
+      </th>
+
+      <td>
+        <label th:text="${blog.getName()}"></label>
+      </td>
+    </tr>
+
+    <tr>
+      <th>
+        <label>Topic:</label>
+      </th>
+
+      <td>
+        <label th:text="${blog.getTopic()}"></label>
+      </td>
+    </tr>
+
+    <tr>
+      <th>
+        <label>Link:</label>
+      </th>
+
+      <td>
+        <label><a th:href="${blog.getLink()}">Thông tin chi tiết ở đây</a></label>
+      </td>
+    </tr>
+    <tr>
+      <th>
+        <label>Describe:</label>
+      </th>
+      <td>
+        <label th:text="${blog.getDescription()}"></label>
+      </td>
+    </tr>
+  </table>
+</div>
+</body>
+</html>

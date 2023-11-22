@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+<div class="container-fluid">
+  <h1>Create Product</h1>
+  <a th:href="@{/blog}">
+    Back to product list
+  </a>
+  <form th:action="@{/blog/update}" th:object="${blog}"
+        method="post" novalidate="novalidate">
+    <input type="hidden" th:field="*{id}"/>
+    <table>
+      <tr>
+        <th>
+          <label for="name">Name</label>
+        </th>
+        <td>
+          <input required type="text" id="name" th:field="*{name}"/>
+        </td>
+      </tr>
+
+      <tr>
+        <th>
+          <label for="topic">Topic</label>
+        </th>
+        <td>
+          <input required type="text" id="topic" th:field="*{topic}"/>
+        </td>
+      </tr>
+
+      <tr>
+        <th>
+          <label for="link">Link</label>
+        </th>
+        <td>
+          <input required type="text" id="link" th:field="*{link}"/>
+        </td>
+      </tr>
+      <tr>
+      <tr>
+        <th>
+          <label for="describe">Describe</label>
+        </th>
+        <td>
+          <textarea required type="text" style="height: 100px;width: 300px" rows="4" cols="50" id="describe" th:field="*{description}"/>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <input type="submit" value="Update"/>
+        </td>
+      </tr>
+    </table>
+  </form>
+</div>
+</body>
+</html>

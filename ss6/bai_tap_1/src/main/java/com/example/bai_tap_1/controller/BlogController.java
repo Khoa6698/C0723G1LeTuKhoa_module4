@@ -1,8 +1,14 @@
 package com.example.bai_tap_1.controller;
 
 import com.example.bai_tap_1.model.Blog;
+import com.example.bai_tap_1.model.Category;
 import com.example.bai_tap_1.service.IBlogService;
+import com.example.bai_tap_1.service.ICategoryService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -16,16 +22,25 @@ import java.util.List;
 public class BlogController {
     @Autowired
     private IBlogService blogService;
+    @Autowired
+    private ICategoryService categoryService;
 
     @GetMapping("")
-    public String list(Model model) {
-        List<Blog> blogList = blogService.findAll();
-            model.addAttribute("blogList", blogList);
+    public String list(@RequestParam(defaultValue = "0") int page,
+                       @RequestParam(defaultValue = "") String searchName,
+                       Model model) {
+        Pageable pageable = PageRequest.of(page, 3, Sort.by("blog_name").ascending()
+                .and(Sort.by("category_id").descending()));
+        Page<Blog> blogPage = blogService.findAll(searchName, pageable);
+        model.addAttribute("blogPage", blogPage);
+        model.addAttribute("searchName", searchName);
         return "views/list";
     }
 
     @GetMapping("/create")
     public String showFormCreate(Model model) {
+        List<Category> categories = categoryService.findAll();
+        model.addAttribute("categories", categories);
         model.addAttribute("blog", new Blog());
         return "views/create";
     }
@@ -39,6 +54,8 @@ public class BlogController {
 
     @GetMapping("/{id}/edit")
     public String showFormEdit(@PathVariable int id, Model model) {
+        List<Category> categories = categoryService.findAll();
+        model.addAttribute("categories", categories);
         model.addAttribute("blog", blogService.findById(id));
         return "views/edit";
     }
@@ -51,29 +68,15 @@ public class BlogController {
     }
 
     @GetMapping("/delete")
-    public String delete(int id , RedirectAttributes redirectAttributes){
+    public String delete(int id, RedirectAttributes redirectAttributes) {
         blogService.delete(id);
         redirectAttributes.addFlashAttribute("message", " delete product successfully");
         return "redirect:/blog";
     }
 
     @GetMapping("/{id}/detail")
-    public String showFormDetail(@PathVariable int id, Model model){
+    public String showFormDetail(@PathVariable int id, Model model) {
         model.addAttribute("blog", blogService.findById(id));
         return "views/detail";
-    }
-
-    @GetMapping("/search")
-    public String search(@RequestParam String name, Model model, RedirectAttributes redirectAttributes){
-        List<Blog> blogs = new ArrayList<>();
-        List<Blog> blogs1 = blogService.findAll();
-        for (int i = 0; i < blogs1.size(); i++) {
-            if(blogs1.get(i).getName().contains(name)){
-                blogs.add(blogs1.get(i));
-            }
-        }
-        model.addAttribute("blogList", blogs);
-        model.addAttribute("name", name);
-        return "views/list";
     }
 }

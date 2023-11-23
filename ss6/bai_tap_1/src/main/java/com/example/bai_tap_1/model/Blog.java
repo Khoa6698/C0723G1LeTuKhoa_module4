@@ -22,8 +22,9 @@ public class Blog {
     @Column(name = "blog_name", columnDefinition = "VARCHAR(45)")
     private String name;
 
-    @Column(name = "blog_topic", columnDefinition = "VARCHAR(45)", unique = true)
-    private String topic;
+    @ManyToOne
+    @JoinColumn(name = "category_id", referencedColumnName = "category_id")
+    private Category category;
 
     @Column(name = "link", columnDefinition = "VARCHAR(255)")
     private String link;

@@ -27,11 +27,13 @@
 
             <tr>
                 <th>
-                    <label for="topic">Topic</label>
+                    <label for="category">Category</label>
                 </th>
 
                 <td>
-                    <input required type="text  " id="topic" th:field="*{topic}"/>
+                    <select id="category" th:field="*{category}">
+                        <option th:each="c : ${categories}" th:value="${c.getId()}" th:text="${c.getName()}"></option>
+                    </select>
                 </td>
             </tr>
 
@@ -46,11 +48,11 @@
             </tr>
             <tr>
                 <th>
-                    <label for="describe">Describe</label>
+                    <label for="description">Description</label>
                 </th>
 
                 <td>
-                    <textarea required style="height: 100px;width: 300px" rows="4" cols="50" type="text" id="describe" th:field="*{description}"/>
+                    <textarea required style="height: 100px;width: 300px" rows="4" cols="50" type="text" id="description" th:field="*{description}"/>
                 </td>
             </tr>
             <tr>

@@ -11,7 +11,7 @@
   <a class="btn btn-outline-dark" th:href="@{/blog}">
     Back to product list
   </a>
-
+  <h1 th:text="${blog.getCategory().name}"></h1>
   <table>
     <tr>
       <th>
@@ -25,11 +25,11 @@
 
     <tr>
       <th>
-        <label>Topic:</label>
+        <label>Category:</label>
       </th>
 
       <td>
-        <label th:text="${blog.getTopic()}"></label>
+        <label th:text="${blog.getCategory().name}"></label>
       </td>
     </tr>
 

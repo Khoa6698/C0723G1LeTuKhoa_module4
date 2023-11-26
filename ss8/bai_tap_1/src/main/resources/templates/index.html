@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        table {
+            border: 1px solid #000;
+
+        }
+
+        th, td {
+            border: 1px dotted #555;
+        }
+    </style>
+</head>
+<body>
+<h1 align="center">Sign In</h1>
+<div align="center">
+    <form  action="/user/create" th:object="${userDto}" method="post">
+        <table>
+            <tr>
+                <th>
+                    <label for="firstname">Firstname</label>
+                </th>
+                <td>
+                    <input required id="firstname" placeholder="firstname" th:field="*{firstname}" >
+                    <small th:if="${#fields.hasErrors('firstname')}" th:errors="*{firstname}"></small>
+                </td>
+            </tr>
+            <tr>
+                <th>
+                    <label for="lastname">Lastname</label>
+                </th>
+                <td>
+                    <input required id="lastname" placeholder="lastname" th:field="*{lastname}" >
+                    <small th:if="${#fields.hasErrors('lastname')}" th:errors="*{lastname}"></small>
+                </td>
+            </tr>
+            <tr>
+                <th>
+                    <label for="phone">Phone</label>
+                </th>
+                <td>
+                    <input required id="phone" placeholder="phone" th:field="*{phone}" >
+                    <small th:if="${#fields.hasErrors('phone')}" th:errors="*{phone}"></small>
+                </td>
+            </tr>
+            <tr>
+                <th>
+                    <label for="age">Age</label>
+                </th>
+                <td>
+                    <input required id="age" placeholder="age" th:field="*{age}" >
+                    <small th:if="${#fields.hasErrors('age')}" th:errors="*{age}"></small>
+                </td>
+            </tr>
+            <tr>
+                <th>
+                    <label for="email">Email</label>
+                </th>
+                <td>
+                    <input required id="email" placeholder="email" th:field="*{email}" >
+                    <small th:if="${#fields.hasErrors('firstname')}" th:errors="*{email}"></small>
+                </td>
+            </tr>
+        </table>
+        <button type="submit">Sign In</button>
+    </form>
+</div>
+</body>
+</html>

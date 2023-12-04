@@ -1,4 +1,4 @@
-package com.example.bai_tap_1.controller;
+package com.example.bai_tap_1.controller.rest;
 
 import com.example.bai_tap_1.model.Category;
 import com.example.bai_tap_1.service.ICategoryService;
